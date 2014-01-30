@@ -1,125 +1,24 @@
-# Libarchive/Ruby
+# LibArchiveRubyFs
 
 Copyright (c) 2009 SUGAWARA Genki <sgwr_dts@yahoo.co.jp>
+Copyright (c) 2014 FlavourSys Technology GmbH <technology@flavoursys.com>
 
 ## Description
 
-Ruby bindings for Libarchive.
+This is a (reduced) fork of the [LibArchive/Ruby](https://bitbucket.org/winebarrel/libarchive-ruby/) gem written by Genki Sugawara. We needed the gem to be aware of the `pkg-config` configuration of `libarchive` and especially non-standard installation locations.
 
-Libarchive is a programming library that can create and read several different streaming archive formats, including most popular tar variants, several cpio formats, and both BSD and GNU ar variants.
+## Major Changes
 
-## Support archive (from Libarchive 2.6.0)
+* Dropped Win32 support.
+* Require `pkg-config`, add non-standard installation location of `libarchive.so` to dynamic linker's search path via `-rpath`.
+* Renamed to avoid name collision.
 
-### reading
-
-* gzip compression
-* bzip2 compression
-* compress/LZW compression
-* GNU tar format (including GNU long filenames, long link names, and
-  sparse files)
-* Solaris 9 extended tar format (including ACLs)
-* Old V7 tar archives
-* POSIX ustar
-* POSIX pax interchange format
-* POSIX octet-oriented cpio
-* SVR4 ASCII cpio
-* Binary cpio (big-endian or little-endian)
-* ISO9660 CD-ROM images (with optional Rockridge extensions)
-* ZIP archives (with uncompressed or "deflate" compressed entries)
-* GNU and BSD 'ar' archives
-* 'mtree' format
-    * lzma compression not supported
-
-### writing
-
-* gzip compression
-* bzip2 compression
-* compress/LZW compression
-* POSIX ustar
-* POSIX pax interchange format
-* "restricted" pax format, which will create ustar archives except for entries that require pax extensions (for long filenames, etc).
-    * ACLs not supported
-* POSIX octet-oriented cpio
-* SVR4 "newc" cpio
-* shar archives
-* GNU and BSD 'ar' archives
-
-## Project Page
-
-[http://rubyforge.org/projects/libarchive](http://rubyforge.org/projects/libarchive)
-
-## Source Code
-
-[https://bitbucket.org/winebarrel/libarchive-ruby](https://bitbucket.org/winebarrel/libarchive-ruby)
-
-## Dependency
-
-Libarchive/Ruby depend on Libarchive.
-
-Please install Libarchive. (version 2.6.0 or more is recommended)
-
-## Install
-
-    gem install libarchive
-
-## Example
-
-### reading archive
-
-    :::ruby
-    
-    require 'libarchive'
-        
-    Archive.read_open_filename('foo.tar.gz') do |ar|
-      while entry = ar.next_header
-        name = entry.pathname
-        data = ar.read_data
-        
-        #data = ""
-        #ar.read_data(1024) do |x|
-        #  data << x
-        #end
-        
-        puts "#{name} (size=#{data.size})"
-      end
-    end
-
-### creating archive
-
-    :::ruby
-    
-    require 'libarchive'
-        
-    Archive.write_open_filename('foo.tar.bz2', Archive::COMPRESSION_BZIP2, Archive::FORMAT_TAR) do |ar|
-      Dir.glob('*.c').each do |fn|
-        ar.new_entry do |entry|
-          entry.copy_stat(fn)
-          entry.pathname = fn
-          ar.write_header(entry)
-          ar.write_data(open(fn) {|f| f.read })
-        
-          #open(fn) do |f|
-          #  ar.write_data do
-          #    f.read(1024)
-          #  end
-          #end
-        end
-      end
-    end
-
-### creating archive by extarnal program
-
-    :::ruby
-    
-    require 'libarchive'
-    
-    Archive.write_open_filename('foo.tar.lzo', 'lzop', Archive::FORMAT_TAR_USTAR) do |ar|
-      ...
-    end
+So, not much to see here.
 
 ## License
 
     Copyright (c) 2009 SUGAWARA Genki <sgwr_dts@yahoo.co.jp>
+    Copyright (c) 2014 FlavourSys Technology GmbH <technology@flavoursys.com>
     All rights reserved.
     
     Redistribution and use in source and binary forms, with or without modification,
@@ -144,15 +43,3 @@ Please install Libarchive. (version 2.6.0 or more is recommended)
     STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY 
     OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH 
     DAMAGE.
-
-### Static link library
-
-Libarchive/Ruby(mswin32) contains Libarchive(2.6.0) and libbzip2(1.0.5).
-
-* Libarchive
-    * http://code.google.com/p/libarchive/
-    * see [COPYING.libarchive](https://bitbucket.org/winebarrel/libarchive-ruby/src/tip/COPYING.libarchive)
-
-* libbzip2
-    * http://www.bzip.org/
-    * see [LICENSE.libbzip2](https://bitbucket.org/winebarrel/libarchive-ruby/src/tip/LICENSE.libbzip2)

@@ -22,8 +22,7 @@ VALUE rb_libarchive_s_version_string(VALUE self) {
 }
 
 void DLLEXPORT Init_rblibarchive() {
-  rb_mArchive = rb_define_module("Archive");
-  rb_define_const(rb_mArchive, "VERSION", rb_str_new2(VERSION));
+  rb_mArchive = rb_define_module("LibArchiveRubyFs");
 
   rb_define_const(rb_mArchive, "COMPRESSION_NONE",     INT2NUM(ARCHIVE_COMPRESSION_NONE));
 #ifdef HAVE_ZLIB_H

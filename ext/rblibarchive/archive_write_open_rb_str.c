@@ -1,12 +1,8 @@
 #include <archive.h>
 #include <ruby.h>
 
-#ifdef _WIN32
-typedef long ssize_t;
-#endif
-
 static int rb_str_write_open(struct archive *a, void *client_data) {
-  if (archive_write_get_bytes_in_last_block(a) == -1) { 
+  if (archive_write_get_bytes_in_last_block(a) == -1) {
     archive_write_set_bytes_in_last_block(a, 1);
   }
 

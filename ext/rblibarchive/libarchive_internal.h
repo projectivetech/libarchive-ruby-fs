@@ -1,10 +1,6 @@
 #ifndef _LIBARCHIVE_INTERNAL_H_
 #define _LIBARCHIVE_INTERNAL_H_
 
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
-
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,26 +9,10 @@
 #include <sys/stat.h>
 #include <errno.h>
 
-#ifndef _WIN32
-#include <unistd.h>
-#endif
-
-#ifdef _WIN32
-#ifdef stat
-#undef stat
-#endif
-#define stat _stat
-#endif // _WIN32
-
 #include <archive.h>
 #include <archive_entry.h>
 
 #include <ruby.h>
-#include <rubysig.h>
-
-#ifdef _WIN32
-#include "libarchive_win32.h"
-#endif
 
 #include "archive_write_open_rb_str.h"
 #include "archive_read_support_compression.h"
@@ -45,7 +25,6 @@
 #define DLLEXPORT
 #endif
 
-#define VERSION          "0.1.2"
 #define BLOCK_SIZE       10240
 #define DATA_BUFFER_SIZE 65536
 
