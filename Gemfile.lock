@@ -1,0 +1,20 @@
+PATH
+  remote: .
+  specs:
+    libarchive-ruby-fs (0.2.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    minitest (5.2.3)
+    rake (10.1.1)
+    rake-compiler (0.9.2)
+      rake
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  libarchive-ruby-fs!
+  minitest
+  rake-compiler
