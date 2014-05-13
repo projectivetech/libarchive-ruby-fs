@@ -1,3 +1,5 @@
 tmp/
 lib/*.so
 *.gem
+Gemfile.lock
+

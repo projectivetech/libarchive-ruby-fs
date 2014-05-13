@@ -15,6 +15,6 @@ Gem::Specification.new do |spec|
   spec.extensions        = ['ext/rblibarchive/extconf.rb']
   spec.require_paths     = ['lib']
 
-  spec.add_development_dependency 'rake-compiler'
-  spec.add_development_dependency 'minitest'
+  spec.add_development_dependency 'rake-compiler', '~> 0.9'
+  spec.add_development_dependency 'minitest', '~> 5.3'
 end
