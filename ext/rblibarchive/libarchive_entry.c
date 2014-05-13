@@ -217,7 +217,7 @@ static VALUE rb_libarchive_entry_fflags_text(VALUE self) {
   Data_Get_Struct(self, struct rb_libarchive_entry_container, p);
   Check_Entry(p);
   fflags_text = archive_entry_fflags_text(p->ae);
-  return (fflags_text != NULL) ? rb_str_new2(fflags_text) : Qnil;
+  return (fflags_text != NULL) ? rb_locale_str_new_cstr(fflags_text) : Qnil;
 }
 
 /* */
@@ -235,7 +235,7 @@ static VALUE rb_libarchive_entry_gname(VALUE self) {
   Data_Get_Struct(self, struct rb_libarchive_entry_container, p);
   Check_Entry(p);
   gname = archive_entry_gname(p->ae);
-  return (gname != NULL) ? rb_str_new2(gname) : Qnil;
+  return (gname != NULL) ? rb_locale_str_new_cstr(gname) : Qnil;
 }
 
 /* */
@@ -245,7 +245,7 @@ static VALUE rb_libarchive_entry_hardlink(VALUE self) {
   Data_Get_Struct(self, struct rb_libarchive_entry_container, p);
   Check_Entry(p);
   hardlink = archive_entry_hardlink(p->ae);
-  return (hardlink != NULL) ? rb_str_new2(hardlink) : Qnil;
+  return (hardlink != NULL) ? rb_locale_str_new_cstr(hardlink) : Qnil;
 }
 
 /* */
@@ -301,7 +301,7 @@ static VALUE rb_libarchive_entry_pathname(VALUE self) {
   Data_Get_Struct(self, struct rb_libarchive_entry_container, p);
   Check_Entry(p);
   pathname = archive_entry_pathname(p->ae);
-  return (pathname != NULL) ? rb_str_new2(pathname) : Qnil;
+  return (pathname != NULL) ? rb_locale_str_new_cstr(pathname) : Qnil;
 }
 
 /* */
@@ -336,7 +336,7 @@ static VALUE rb_libarchive_entry_sourcepath(VALUE self) {
   Data_Get_Struct(self, struct rb_libarchive_entry_container, p);
   Check_Entry(p);
   sourcepath = archive_entry_sourcepath(p->ae);
-  return (sourcepath != NULL) ? rb_str_new2(sourcepath) : Qnil;
+  return (sourcepath != NULL) ? rb_locale_str_new_cstr(sourcepath) : Qnil;
 }
 #endif
 
@@ -364,7 +364,7 @@ static VALUE rb_libarchive_entry_strmode(VALUE self) {
   Data_Get_Struct(self, struct rb_libarchive_entry_container, p);
   Check_Entry(p);
   strmode = archive_entry_strmode(p->ae);
-  return (strmode != NULL) ? rb_str_new2(strmode) : Qnil;
+  return (strmode != NULL) ? rb_locale_str_new_cstr(strmode) : Qnil;
 }
 #endif
 
@@ -375,7 +375,7 @@ static VALUE rb_libarchive_entry_symlink(VALUE self) {
   Data_Get_Struct(self, struct rb_libarchive_entry_container, p);
   Check_Entry(p);
   symlink = archive_entry_symlink(p->ae);
-  return (symlink != NULL) ? rb_str_new2(symlink) : Qnil;
+  return (symlink != NULL) ? rb_locale_str_new_cstr(symlink) : Qnil;
 }
 
 /* */
@@ -393,7 +393,7 @@ static VALUE rb_libarchive_entry_uname(VALUE self) {
   Data_Get_Struct(self, struct rb_libarchive_entry_container, p);
   Check_Entry(p);
   uname = archive_entry_uname(p->ae);
-  return (uname != NULL) ? rb_str_new2(uname) : Qnil;
+  return (uname != NULL) ? rb_locale_str_new_cstr(uname) : Qnil;
 }
 
 /* */
@@ -902,7 +902,7 @@ static VALUE rb_libarchive_entry_xattr_next(VALUE self) {
   if (archive_entry_xattr_next(p->ae, &name, &value, &size) != ARCHIVE_OK) {
     return Qnil;
   } else {
-    return rb_ary_new3(3, rb_str_new2(name), rb_str_new(value, size));
+    return rb_ary_new3(3, rb_locale_str_new_cstr(name), rb_locale_str_new(value, size));
   }
 }
 
