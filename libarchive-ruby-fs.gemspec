@@ -5,11 +5,11 @@ Gem::Specification.new do |spec|
   spec.name              = 'libarchive-ruby-fs'
   spec.version           = LibArchiveRubyFs::VERSION
   spec.summary           = 'Ruby bindings for Libarchive.'
-  spec.description       = 'Ruby bindings for Libarchive. Libarchive is a programming library that can create and read several different streaming archive formats, including most popular tar variants, several cpio formats, and both BSD and GNU ar variants.'
+  spec.description       = 'Ruby bindings for Libarchive. This is a fork of the libarchive-ruby gem.'
   
   spec.authors           = ['winebarrel', 'FlavourSys Technology GmbH']
   spec.email             = 'technology@flavoursys.com'
-  spec.homepage          = 'http://libarchive.rubyforge.org'
+  spec.homepage          = 'https://github.com/FlavourSys/libarchive-ruby-fs'
 
   spec.files             = Dir.glob('ext/**/*') + Dir.glob('lib/**/*.rb')
   spec.extensions        = ['ext/rblibarchive/extconf.rb']
