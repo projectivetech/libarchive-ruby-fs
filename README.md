@@ -1,6 +1,7 @@
 # LibArchiveRubyFs
 
 Copyright (c) 2009 SUGAWARA Genki <sgwr_dts@yahoo.co.jp>
+
 Copyright (c) 2014 FlavourSys Technology GmbH <technology@flavoursys.com>
 
 ## Description
@@ -12,8 +13,8 @@ This is a (reduced) fork of the [LibArchive/Ruby](https://bitbucket.org/winebarr
 * Dropped Win32 support.
 * Require `pkg-config`, add non-standard installation location of `libarchive.so` to dynamic linker's search path via `-rpath`.
 * Renamed to avoid name collision.
-
-So, not much to see here.
+* Moved to GitHub.
+* Converted line endings to Unix :bowtie:
 
 ## License
 
