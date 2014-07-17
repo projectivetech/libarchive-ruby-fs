@@ -13,6 +13,7 @@
 #include <archive_entry.h>
 
 #include <ruby.h>
+#include <ruby/thread.h>
 
 #include "archive_write_open_rb_str.h"
 #include "archive_read_support_compression.h"

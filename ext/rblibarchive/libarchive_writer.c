@@ -174,28 +174,49 @@ static VALUE rb_libarchive_writer_write_header(VALUE self, VALUE v_entry) {
   return Qnil;
 }
 
+typedef struct _archive_write_data_p {
+  struct archive* ar;
+  const char*     buff;
+  ssize_t         size;
+  int             bytes_written;
+} archive_write_data_p;
+
+static void* rb_libarchive_writer_write_data1(void* _params)
+{
+  archive_write_data_p* params = (archive_write_data_p*) _params;
+  params->bytes_written = archive_write_data(params->ar, params->buff, params->size);
+  return NULL;
+}
+
 static ssize_t rb_libarchive_writer_write_data0(struct archive *ar, VALUE v_buff) {
-  const char *buff;
-  size_t size;
-  ssize_t n;
+  archive_write_data_p params = { ar, NULL, 0, -1 };
 
   if (NIL_P(v_buff)) {
     return 0;
   }
 
   Check_Type(v_buff, T_STRING);
-  buff = RSTRING_PTR(v_buff);
-  size = RSTRING_LEN(v_buff);
+  params.buff = RSTRING_PTR(v_buff);
+  params.size = RSTRING_LEN(v_buff);
 
-  if (size < 1) {
+  if (params.size < 1) {
     return 0;
   }
 
-  if ((n = archive_write_data(ar, buff, size)) < 0) {
+  /*
+   * Let's only release the GIL when the buffer has a reasonable size.
+   * Re-acquiring the GIL is expensive.
+   */
+  if (params.size > 65536)
+    rb_thread_call_without_gvl(rb_libarchive_writer_write_data1, (void*) &params, NULL, NULL);
+  else
+    rb_libarchive_writer_write_data1((void*) &params);
+
+  if (params.bytes_written < 0) {
     rb_raise(rb_eArchiveError, "Write data failed: %s", archive_error_string(ar));
   }
 
-  return n;
+  return params.bytes_written;
 }
 
 /* */
