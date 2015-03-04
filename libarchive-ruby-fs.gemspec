@@ -4,6 +4,7 @@ require 'libarchive-ruby-fs/version'
 Gem::Specification.new do |spec|
   spec.name              = 'libarchive-ruby-fs'
   spec.version           = LibArchiveRubyFs::VERSION
+  spec.license           = 'MIT'
   spec.summary           = 'Ruby bindings for Libarchive.'
   spec.description       = 'Ruby bindings for Libarchive. This is a fork of the libarchive-ruby gem.'
   
