@@ -5,7 +5,7 @@ VALUE rb_eArchiveError;
 
 /* */
 VALUE rb_libarchive_s_version_number(VALUE self) {
-#if ARCHIVE_VERSION >= 2005000
+#if ARCHIVE_VERSION_NUMBER >= 2005000
   return INT2NUM(archive_version_number());
 #else
   return INT2NUM(archive_version_stamp());
