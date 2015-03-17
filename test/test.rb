@@ -49,6 +49,9 @@ class UnicodeTest < MiniTest::Test
     # 'xäx' in UTF-8.
     [120, 195, 164, 120].pack('C*').force_encoding('UTF-8') => 'simple',
     # 'xäx' in UTF-8 with a" combining characters.
+    # NOTE: These test cases fail as somewhere along the way the diacritics
+    #       are normalized. In fact, as the representation below is one byte
+    #       longer than the one above, this is not valid UTF-8.
     [120, 97, 204, 136, 120].pack('C*').force_encoding('UTF-8') => 'combining'
   }.each do |file, tname|
     define_method("test_unicode_zip_#{tname}") do
