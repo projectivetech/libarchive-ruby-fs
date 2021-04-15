@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.summary           = 'Ruby bindings for Libarchive.'
   spec.description       = 'Ruby bindings for Libarchive. This is a fork of the libarchive-ruby gem.'
   
-  spec.authors           = ['winebarrel', 'FlavourSys Technology GmbH']
-  spec.email             = 'technology@flavoursys.com'
-  spec.homepage          = 'https://github.com/FlavourSys/libarchive-ruby-fs'
+  spec.authors           = ['winebarrel', 'Projective Technology GmbH']
+  spec.email             = 'technology@projective.io'
+  spec.homepage          = 'https://github.com/projectivetech/libarchive-ruby-fs'
 
   spec.files             = Dir.glob('ext/**/*') + Dir.glob('lib/**/*.rb')
   spec.extensions        = ['ext/rblibarchive/extconf.rb']
