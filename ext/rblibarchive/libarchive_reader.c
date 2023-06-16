@@ -89,7 +89,7 @@ static int rb_libarchive_reader_s_open_filename0(struct rb_libarchive_archive_co
     struct stat s;
 
     if (stat(filename, &s) != 0) {
-      archive_set_error(p->ar, -1, strerror(errno));
+      archive_set_error(p->ar, -1, "%s", strerror(errno));
       return (ARCHIVE_FATAL);
     }
   }
